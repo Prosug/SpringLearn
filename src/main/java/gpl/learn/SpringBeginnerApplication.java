@@ -1,7 +1,10 @@
 package gpl.learn;
 
 import gpl.learn.Bean.MyBean;
+import gpl.learn.Bean.myBeanProperties;
 import gpl.learn.Component.ComponentDependency;
+import gpl.learn.Pojo.UserPojo;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,10 +15,15 @@ public class SpringBeginnerApplication implements CommandLineRunner {
     //vamos a inyectar la dependencias
     private ComponentDependency componentDependency;
     private MyBean myBean;
+    private myBeanProperties myBeanProperties;
+    private UserPojo userPojo;
 
-    public SpringBeginnerApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency, MyBean myBean){
+    public SpringBeginnerApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency, MyBean myBean,
+                                     myBeanProperties myBeanProperties, UserPojo userPojo){
         this.componentDependency=componentDependency;
         this.myBean=myBean;
+        this.myBeanProperties=myBeanProperties;
+        this.userPojo=userPojo;
     }
     public static void main(String[] args) {
         SpringApplication.run(SpringBeginnerApplication.class, args);
@@ -26,5 +34,7 @@ public class SpringBeginnerApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         componentDependency.saludar();
         myBean.imprimir();
+        System.out.println(myBeanProperties.fuction());
+        System.out.println(userPojo.getEmail()+' '+userPojo.getPassword());
     }
 }
